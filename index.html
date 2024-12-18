@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Menu</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="mealsMenu.js"></script>
+    <script src="foodMenu.js"></script>
+    <script src="hotBevMenu.js"></script>
+    <script src="coldBevMenu.js"></script>
+    <script src="dessertsMenu.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Our Menu</h1>
+        <div class="categories">
+            <button class="category-btn active" data-category="meals">
+                <img src="https://restaurantimages.s3.ap-south-1.amazonaws.com/Samvene The Bagel Cafe/ItemImages/Meals/1720769642337best-bagels-in-hong-kong-1600x900.webp" alt="Meals">
+                <span>Meals</span>
+            </button>
+            <button class="category-btn" data-category="food">
+                <img src="https://restaurantimages.s3.ap-south-1.amazonaws.com/Samvene The Bagel Cafe/ItemImages/Food/17207696705310.89399200_1551782137_fast1.jpg" alt="Food">
+                <span>Food</span>
+            </button>
+            <button class="category-btn" data-category="hot-beverages">
+                <img src="https://restaurantimages.s3.ap-south-1.amazonaws.com/Samvene The Bagel Cafe/ItemImages/Hot Beverages/1720769681528types_of_coffee_91a828a5-7ff3-427d-acaa-c8b7289c9e5a_1024x.webp" alt="Hot Beverages">
+                <span>Hot Beverages</span>
+            </button>
+            <button class="category-btn" data-category="cold-beverages">
+                <img src="https://restaurantimages.s3.ap-south-1.amazonaws.com/Samvene The Bagel Cafe/ItemImages/Cold Beverages/1720769697346Mocktails.jpeg" alt="Cold Beverages">
+                <span>Cold Beverages</span>
+            </button>
+            <button class="category-btn" data-category="desserts">
+                <img src="https://restaurantimages.s3.ap-south-1.amazonaws.com/Samvene The Bagel Cafe/ItemImages/Desserts/1720769712970Desserts.jpeg" alt="Desserts">
+                <span>Desserts</span>
+            </button>
+        </div>
+
+        <div class="menu-section active" data-category="meals" data-set="mealsMenuData"></div>
+        <div class="menu-section " data-category="food" data-set="foodMenuData"></div>
+        <div class="menu-section " data-category="hot-beverages" data-set="hotBevMenuData"></div>
+        <div class="menu-section " data-category="cold-beverages" data-set="coldBevMenuData"></div>
+        <div class="menu-section " data-category="desserts" data-set="dessertsMenuData"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
