@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const setCategoryData = function(cat) {
-    // console.log('data', cat.dataSet);
     // Code rectified
     const categoryData = cat.dataSet.map(category => {
         const itemsHtml = category.Items.map(item => {
@@ -100,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     customizeButtons.forEach(btn => {
         btn.addEventListener('click', function () {
             this.parentElement.parentElement.children[1].classList.toggle('active');
-            console.log('customisation clicked', this.parentElement.parentElement.children[1]);
         })
     });
 
