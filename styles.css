@@ -2,10 +2,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Roboto", serif;
 }
 
 body {
-    font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f4f4f4;
@@ -17,9 +17,11 @@ body {
     padding: 20px;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 .categories {
@@ -66,7 +68,7 @@ h1 {
 }
 
 .category-btn.active {
-    background-color: #dbcabd;
+    background-color: #f5ccac;
     /* color: white; */
 }
 
@@ -93,13 +95,13 @@ h1 {
     outline: none;
     transition: 0.4s;
     font-size: large;
-    font-weight: 700;
+    font-weight: 500;
     border-radius: 8px;
 }
 
-.collapsible-header:hover {
+/* .collapsible-header:hover {
     background-color: #ddd;
-}
+} */
 
 .collapsible-content {
     padding: 0 18px;
@@ -109,9 +111,23 @@ h1 {
 }
 
 .collapsible.active .collapsible-header {
-    background-color: dbcabd;
+    background-color: #f5ccac;
 }
 
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collapsible-header img {
+    width: 20px;
+    transition: all 0.5s ease;
+}
+
+.collapsible.active .collapsible-header img {
+    transform: rotate(180deg);
+}
 
 .collapsible.active .collapsible-content {
     max-height: fit-content;
@@ -179,13 +195,20 @@ h1 {
     flex-direction: column;
 }
 
+.item-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 .price {
     font-weight: bold;
     font-size: 18px;
 }
 
 .customize-btn {
-    background-color: #007bff;
+    background-color: #000;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -195,13 +218,28 @@ h1 {
 }
 
 .customize-btn:hover {
-    background-color: #0056b3;
+    background-color: #303030;
+}
+
+.customize-btn:focus ~ .add-ons {
+    display: block;
 }
 
 .add-ons {
     font-size: 12px;
     color: #666;
     margin-top: 5px;
+    display: none;
+}
+
+.add-ons.active {
+    display: block;
+}
+
+.add-ons .price{
+    font-size: 14px;
+    color: #333;
+    font-weight: 400;
 }
 
 .variants {

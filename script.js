@@ -1,36 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const categoryButtons = document.querySelectorAll('.category-btn');
     const menuSections = document.querySelectorAll('.menu-section');
-
-    // Individual Menu Sections
-    // const foodMenu = menuSections.
+    // const customisationSection = document.querySelectorAll('')
     
-    // const categoryData = data.forEach(category => {
-    //     return `<div class="collapsible">
-    //             <button class="collapsible-header">${category.Category_name}</button>
-    //             <div class="collapsible-content">
-    //                 <div class="menu-items">` +
-    //                 category.Items.forEach(item => {
-    //                     return `<div class="menu-item">
-    //                         <img src="${item.item_image}" alt="${item.Name}">
-    //                         <div class="item-details">
-    //                             <h3>${item.Name} <span class="veg-badge">Veg</span></h3>
-    //                             <p>${item.Description}</p>
-    //                             <div class="item-footer">
-    //                                 <span class="price">₹${item.Price}</span>
-    //                                 <div class="add-ons">` +
-    //                                 item.Customisation.forEach(opt => {
-    //                                     return `<span>${opt.Name} +₹${opt.Price}</span>`
-    //                                 })
-    //                                 + `</div>
-    //                             </div>
-    //                         </div>
-    //                     </div>`
-    //                 }) +   
-    //                 `</div>
-    //             </div>
-    //         </div>`;
-    // });
     const categoryMap = [
         {
             "categoryName": 'meals',
@@ -55,17 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const setCategoryData = function(cat) {
-        console.log('data', cat.dataSet);
-    // Code rectified by gpt
+    // console.log('data', cat.dataSet);
+    // Code rectified
     const categoryData = cat.dataSet.map(category => {
         const itemsHtml = category.Items.map(item => {
           const customisationHtml = item.Customisation
             .map(opt => {
-                return customisationOptions = opt.Options.map(opt1 => `<span>${opt1.Name} +₹${opt1.Price}</span></br>`).join("");
+                return customisationOptions = opt.Options.map(opt1 => `<span>${opt1.Name} <span class="price">&nbsp;+ ₹${opt1.Price}</span></span></br>`).join("");
             })
             .join("");
             const itemImage = item.item_image && item.item_image !== 'url' ? `<img src="${item.item_image}" alt="${item.Name}"></img>` : '';
-      
+            const customizeBtn = item.Customisation.length ? `<button class="customize-btn">Customize</button>` : '';
           return `
             <div class="menu-item">
               ${itemImage}
@@ -73,8 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h3>${item.Name}</h3>
                 <p>${item.Description}</p>
                 <div class="item-footer">
-                  <span class="price">₹${item.Price}</span>
-                  <div class="add-ons">${customisationHtml}</div>
+                    <div class="item-footer-inner">
+                        <span class="price">₹${item.Price}</span>
+                        ${customizeBtn}
+                    </div>
+                    <div class="add-ons">${customisationHtml}</div>
                 </div>
               </div>
             </div>`;
@@ -82,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
         return `
           <div class="collapsible">
-            <button class="collapsible-header">${category.Category_name}</button>
+            <button class="collapsible-header">${category.Category_name}<img src="chevron_icon.svg" /></button>
             <div class="collapsible-content">
               <div class="menu-items">${itemsHtml}</div>
             </div>
@@ -114,12 +89,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     const collapsibles = document.querySelectorAll('.collapsible-header');
-
-    console.log('collapsibles: ', collapsibles);
+    const customizeButtons = document.querySelectorAll('.customize-btn');
 
     collapsibles.forEach(header => {
         header.addEventListener('click', function() {
             this.parentElement.classList.toggle('active');
         });
     });
+
+    customizeButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.parentElement.parentElement.children[1].classList.toggle('active');
+            console.log('customisation clicked', this.parentElement.parentElement.children[1]);
+        })
+    });
+
+
 });

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Menu</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .collapsible-header {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-4">
+
+  <div id="menu-container" class="space-y-4"></div>
+
+  <script>
+    // Example JSON data (replace this with the JSON data from the file)
+    const menuData = [
+      {
+        "Category_name": "Non-Veg Appetizers",
+        "Items": [
+          {
+            "Name": "Chicken Fries",
+            "Description": "Savor the taste of delicious chicken & crispy golden fries, topped with your choice of sauce & cheese",
+            "Price": 249,
+            "item_image": "https://via.placeholder.com/150",
+            "Customisation": [
+              {
+                "Name": "Add on",
+                "Options": [
+                  { "Name": "Peri Peri", "Price": 29 },
+                  { "Name": "Cheese", "Price": 49 }
+                ]
+              }
+            ]
+          },
+          {
+            "Name": "Chicken Wings",
+            "Description": "Fulfill your cravings with juicy chicken wings in a symphony of flavors.",
+            "Price": 299,
+            "item_image": "https://via.placeholder.com/150"
+          }
+        ]
+      },
+      {
+        "Category_name": "Veg Appetizers",
+        "Items": [
+          {
+            "Name": "French Fries",
+            "Description": "Crispy golden fries with a side of ketchup.",
+            "Price": 159,
+            "item_image": "https://via.placeholder.com/150"
+          }
+        ]
+      }
+    ];
+
+    const menuContainer = document.getElementById("menu-container");
+
+    // Generate Menu HTML
+    menuData.forEach(category => {
+      // Create collapsible section
+      const categoryDiv = document.createElement("div");
+      categoryDiv.classList.add("collapsible");
+
+      // Header
+      const header = document.createElement("button");
+      header.classList.add("collapsible-header", "bg-blue-500", "text-white", "px-4", "py-2", "rounded");
+      header.textContent = category.Category_name;
+
+      // Content
+      const contentDiv = document.createElement("div");
+      contentDiv.classList.add("collapsible-content", "hidden", "p-4", "bg-white", "rounded", "shadow");
+
+      // Items
+      category.Items.forEach(item => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("menu-item", "flex", "space-x-4", "py-2", "border-b");
+
+        // Image
+        const img = document.createElement("img");
+        img.src = item.item_image;
+        img.alt = item.Name;
+        img.classList.add("w-16", "h-16", "object-cover", "rounded");
+
+        // Details
+        const detailsDiv = document.createElement("div");
+        detailsDiv.classList.add("item-details");
+
+        const name = document.createElement("h3");
+        name.textContent = item.Name;
+        name.classList.add("font-bold", "text-lg");
+
+        const description = document.createElement("p");
+        description.textContent = item.Description;
+        description.classList.add("text-sm", "text-gray-600");
+
+        const footerDiv = document.createElement("div");
+        footerDiv.classList.add("item-footer", "flex", "justify-between", "items-center");
+
+        const price = document.createElement("span");
+        price.textContent = `₹${item.Price}`;
+        price.classList.add("text-green-500", "font-bold");
+
+        const customizeBtn = document.createElement("button");
+        customizeBtn.textContent = "Customize";
+        customizeBtn.classList.add("customize-btn", "bg-gray-200", "px-2", "py-1", "rounded");
+
+        // Append to details
+        footerDiv.appendChild(price);
+        footerDiv.appendChild(customizeBtn);
+        detailsDiv.appendChild(name);
+        detailsDiv.appendChild(description);
+        detailsDiv.appendChild(footerDiv);
+
+        // Add customizations if available
+        if (item.Customisation && item.Customisation.length > 0) {
+          const customizations = document.createElement("div");
+          customizations.classList.add("variants", "text-sm", "text-gray-700", "mt-2");
+
+          customizations.textContent = item.Customisation.map(cust =>
+            `${cust.Name}: ${cust.Options.map(opt => `${opt.Name} (+₹${opt.Price})`).join(", ")}`
+          ).join("\n");
+
+          detailsDiv.appendChild(customizations);
+        }
+
+        // Append image and details to item div
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(detailsDiv);
+
+        // Append item to content
+        contentDiv.appendChild(itemDiv);
+      });
+
+      // Append header and content to category
+      categoryDiv.appendChild(header);
+      categoryDiv.appendChild(contentDiv);
+
+      // Append category to container
+      menuContainer.appendChild(categoryDiv);
+
+      // Add toggle functionality
+      header.addEventListener("click", () => {
+        contentDiv.classList.toggle("hidden");
+      });
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
